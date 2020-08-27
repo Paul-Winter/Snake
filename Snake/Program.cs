@@ -14,6 +14,7 @@ namespace Snake
         {
             Console.SetWindowSize(80, 25);
             Console.SetBufferSize(80, 25);
+            Console.CursorVisible = false;
 
             // отрисовка рамки
             HorisontalLine topLine = new HorisontalLine(0, 78, 0, '+');
@@ -28,18 +29,21 @@ namespace Snake
 
             Point tail = new Point(4, 5, '*');
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
-
             snake.Draw();
-            snake.Move();
-            Thread.Sleep(300);
 
-            for (int i = 0; i < 50; i++)
+            while (true)
             {
-                snake.Move();
-                Thread.Sleep(300);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.Handler(key.Key);
+                }
+                else
+                {
+                    Thread.Sleep(200);
+                    snake.Move();
+                }
             }
-
-            Console.ReadLine();
         }
     }
 }
