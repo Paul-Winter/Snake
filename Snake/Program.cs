@@ -30,8 +30,9 @@ namespace Snake
             while (true)
             {
                 if (wall.IsHit(snake) || snake.IsHitTail())
+                {
                     break;
-
+                }
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
@@ -50,7 +51,6 @@ namespace Snake
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.Handler(key.Key);
                 }
-
             }
         }
     }
