@@ -21,28 +21,42 @@ namespace Snake
             HorisontalLine bottomLine = new HorisontalLine(0, 78, 24, '+');
             VerticalLine leftLine = new VerticalLine(0, 0, 24, '+');
             VerticalLine rigthLine = new VerticalLine(78, 0, 24, '+');
-
             topLine.Draw();
             bottomLine.Draw();
             leftLine.Draw();
             rigthLine.Draw();
 
+            // отрисовка змейки
             Point tail = new Point(4, 5, '*');
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
             snake.Draw();
 
+            // отрисовка еды
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            Point food = foodCreator.CreateFood();
+            food.Draw();
+
             while (true)
             {
+                if (snake.Eat(food))
+                {
+                    food = foodCreator.CreateFood();
+                    food.Draw();
+                    snake.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+
+                Thread.Sleep(200);
+
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.Handler(key.Key);
                 }
-                else
-                {
-                    Thread.Sleep(200);
-                    snake.Move();
-                }
+
             }
         }
     }

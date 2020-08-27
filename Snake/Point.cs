@@ -61,5 +61,10 @@ namespace Snake
                 y -= offset;
             }
         }
+
+        public bool IsHit(Point point)
+        {
+            return point.x == this.x && point.y == this.y;
+        }
     }
 }
