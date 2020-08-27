@@ -16,28 +16,22 @@ namespace Snake
             Console.SetBufferSize(80, 25);
             Console.CursorVisible = false;
 
-            // отрисовка рамки
-            HorisontalLine topLine = new HorisontalLine(0, 78, 0, '+');
-            HorisontalLine bottomLine = new HorisontalLine(0, 78, 24, '+');
-            VerticalLine leftLine = new VerticalLine(0, 0, 24, '+');
-            VerticalLine rigthLine = new VerticalLine(78, 0, 24, '+');
-            topLine.Draw();
-            bottomLine.Draw();
-            leftLine.Draw();
-            rigthLine.Draw();
+            Wall wall = new Wall(80, 25);
+            wall.Draw();
 
-            // отрисовка змейки
             Point tail = new Point(4, 5, '*');
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
             snake.Draw();
 
-            // отрисовка еды
             FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
             food.Draw();
 
             while (true)
             {
+                if (wall.IsHit(snake) || snake.IsHitTail())
+                    break;
+
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
