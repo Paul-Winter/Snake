@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Snake
 {
@@ -29,6 +30,14 @@ namespace Snake
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
 
             snake.Draw();
+            snake.Move();
+            Thread.Sleep(300);
+
+            for (int i = 0; i < 50; i++)
+            {
+                snake.Move();
+                Thread.Sleep(300);
+            }
 
             Console.ReadLine();
         }
