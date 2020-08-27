@@ -11,6 +11,7 @@ namespace Snake
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 25);
             Console.SetBufferSize(80, 25);
 
             // отрисовка рамки
