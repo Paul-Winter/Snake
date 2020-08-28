@@ -10,6 +10,7 @@ namespace Snake
     class Snake: Figure
     {
         Direction direction;
+        private Point head, tail;
 
         public Snake(Point tail, int length, Direction direction)
         {
@@ -25,26 +26,30 @@ namespace Snake
 
         internal void Move()
         {
-            Point tail = pList.First();
+            tail = pList.First();
             pList.Remove(tail);
-            Point head = GetNextPoint();
+            head = GetNextPoint();
             pList.Add(head);
-
             tail.Clear();
             head.Draw();
         }
 
         public Point GetNextPoint()
-        {
-            Point head = pList.Last();
+        {           
+            head = pList.Last();
+            head.sym = '%';
+            Console.ForegroundColor = ConsoleColor.Green;
+            head.Draw();
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            nextPoint.sym = '&';
             return nextPoint;
         }
 
         internal bool IsHitTail()
         {
-            var head = pList.Last();
+            head = pList.Last();
             for (int i = 0; i < pList.Count - 3; i++)
             {
                 if (head.IsHit(pList[i]))
@@ -87,7 +92,7 @@ namespace Snake
 
         internal bool Eat(Point food)
         {
-            Point head = GetNextPoint();
+            head = GetNextPoint();
             if (head.IsHit(food))
             {
                 food.sym = head.sym;

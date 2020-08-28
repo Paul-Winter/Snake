@@ -23,7 +23,7 @@ namespace Snake
             Console.ForegroundColor = ConsoleColor.Yellow;
             wall.Draw();
 
-            Point tail = new Point(4, 5, '*');
+            Point tail = new Point(4, 5, '%');
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
             Console.ForegroundColor = ConsoleColor.Green;
             snake.Draw();
@@ -32,7 +32,7 @@ namespace Snake
             Point food = foodCreator.CreateFood();
             Console.ForegroundColor = ConsoleColor.Red;
             food.Draw();
-            Console.ForegroundColor = ConsoleColor.Green;
+            //Console.ForegroundColor = ConsoleColor.Green;
 
             Message message = new Message();
 

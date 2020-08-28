@@ -64,7 +64,7 @@ namespace Snake
 
         public bool IsHit(Point point)
         {
-            return point.x == this.x && point.y == this.y;
+            return point.x == x && point.y == y;
         }
     }
 }
