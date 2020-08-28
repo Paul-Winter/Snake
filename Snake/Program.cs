@@ -17,15 +17,21 @@ namespace Snake
             Console.CursorVisible = false;
 
             Wall wall = new Wall(80, 25);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             wall.Draw();
 
             Point tail = new Point(4, 5, '*');
             Snake snake = new Snake(tail, 4, Direction.RIGHT);
+            Console.ForegroundColor = ConsoleColor.Green;
             snake.Draw();
 
-            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            FoodCreator foodCreator = new FoodCreator(80, 25, '@');
             Point food = foodCreator.CreateFood();
+            Console.ForegroundColor = ConsoleColor.Red;
             food.Draw();
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Message message = new Message();
 
             while (true)
             {
@@ -52,6 +58,17 @@ namespace Snake
                     snake.Handler(key.Key);
                 }
             }
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            message.topLine.Draw();
+            Console.SetCursorPosition(27, 10);
+            Console.Write(message.text);
+            Console.SetCursorPosition(34, 12);
+            Console.Write(message.cb);
+            Console.SetCursorPosition(33, 14);
+            Console.Write(message.author);
+            message.bottomLine.Draw();
+            Console.ReadKey();
         }
     }
 }
