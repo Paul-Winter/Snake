@@ -16,6 +16,9 @@ namespace Snake
             Console.SetBufferSize(80, 25);
             Console.CursorVisible = false;
 
+            int speed = 200;
+            int score = 0;
+
             Wall wall = new Wall(80, 25);
             Console.ForegroundColor = ConsoleColor.Yellow;
             wall.Draw();
@@ -46,13 +49,15 @@ namespace Snake
                     food.Draw();
                     Console.ForegroundColor = ConsoleColor.Green;
                     snake.Draw();
+                    speed -= 5;
+                    score++;
                 }
                 else
                 {
                     snake.Move();
                 }
 
-                Thread.Sleep(200);
+                Thread.Sleep(speed);
 
                 if (Console.KeyAvailable)
                 {
@@ -63,13 +68,13 @@ namespace Snake
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             message.topLine.Draw();
+            message.bottomLine.Draw();
             Console.SetCursorPosition(27, 10);
             Console.Write(message.text);
-            Console.SetCursorPosition(34, 12);
-            Console.Write(message.cb);
-            Console.SetCursorPosition(33, 14);
+            Console.SetCursorPosition(32, 12);
+            Console.Write($@"your score is {score}");
+            Console.SetCursorPosition(28, 14);
             Console.Write(message.author);
-            message.bottomLine.Draw();
             Console.ReadKey();
         }
     }
