@@ -16,7 +16,7 @@ namespace Snake
             Console.SetBufferSize(80, 25);
             Console.CursorVisible = false;
 
-            int speed = 200;
+            int speed = 250;
             int score = 0;
 
             Wall wall = new Wall(80, 25);
