@@ -29,7 +29,7 @@ namespace Snake
             return false;
         }
 
-        private bool IsHit(Point point)
+        public bool IsHit(Point point)
         {
             foreach (var p in pList)
             {

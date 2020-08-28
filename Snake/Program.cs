@@ -16,7 +16,7 @@ namespace Snake
             Console.SetBufferSize(80, 25);
             Console.CursorVisible = false;
 
-            int speed = 250;
+            int speed = 150;
             int score = 0;
 
             Wall wall = new Wall(80, 25);
@@ -44,12 +44,15 @@ namespace Snake
                 }
                 if (snake.Eat(food))
                 {
-                    food = foodCreator.CreateFood();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    food.Draw();
+                    while (snake.IsHit(food))
+                    {
+                        food = foodCreator.CreateFood();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        food.Draw();
+                    }
                     Console.ForegroundColor = ConsoleColor.Green;
                     snake.Draw();
-                    speed -= 5;
+                    //speed -= 5;
                     score++;
                 }
                 else
