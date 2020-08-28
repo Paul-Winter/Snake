@@ -10,7 +10,7 @@ namespace Snake
     class Snake: Figure
     {
         Direction direction;
-        private Point head, tail;
+        public Point head, tail;
 
         public Snake(Point tail, int length, Direction direction)
         {

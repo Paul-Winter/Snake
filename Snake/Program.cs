@@ -32,7 +32,6 @@ namespace Snake
             Point food = foodCreator.CreateFood();
             Console.ForegroundColor = ConsoleColor.Red;
             food.Draw();
-            //Console.ForegroundColor = ConsoleColor.Green;
 
             Message message = new Message();
 
@@ -44,7 +43,7 @@ namespace Snake
                 }
                 if (snake.Eat(food))
                 {
-                    while (snake.IsHit(food))
+                    while (snake.head.IsHit(food))
                     {
                         food = foodCreator.CreateFood();
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -52,7 +51,7 @@ namespace Snake
                     }
                     Console.ForegroundColor = ConsoleColor.Green;
                     snake.Draw();
-                    speed -= 2;
+                    speed -= 5;
                     score++;
                 }
                 else
