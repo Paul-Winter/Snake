@@ -42,7 +42,9 @@ namespace Snake
                 if (snake.Eat(food))
                 {
                     food = foodCreator.CreateFood();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     food.Draw();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     snake.Draw();
                 }
                 else
