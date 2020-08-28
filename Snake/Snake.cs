@@ -56,13 +56,33 @@ namespace Snake
         public void Handler(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
-                direction = Direction.LEFT;
+            {
+                if (direction == Direction.RIGHT)
+                    direction = Direction.RIGHT;
+                else
+                    direction = Direction.LEFT;
+            }
             else if (key == ConsoleKey.RightArrow)
-                direction = Direction.RIGHT;
+            {
+                if (direction == Direction.LEFT)
+                    direction = Direction.LEFT;
+                else
+                    direction = Direction.RIGHT;
+            }
             else if (key == ConsoleKey.UpArrow)
-                direction = Direction.UP;
+            {
+                if (direction == Direction.DOWN)
+                    direction = Direction.DOWN; 
+                else
+                    direction = Direction.UP;
+            }
             else if (key == ConsoleKey.DownArrow)
-                direction = Direction.DOWN;
+            {
+                if (direction == Direction.UP)
+                    direction = Direction.UP;
+                else
+                    direction = Direction.DOWN;
+            }
         }
 
         internal bool Eat(Point food)
