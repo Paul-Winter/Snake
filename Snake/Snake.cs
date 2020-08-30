@@ -95,6 +95,7 @@ namespace Snake
             head = GetNextPoint();
             if (head.IsHit(food))
             {
+                Console.WriteLine("\a");
                 food.sym = head.sym;
                 pList.Add(food);
                 return true;

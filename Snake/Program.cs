@@ -77,6 +77,7 @@ namespace Snake
             Console.Write($@"your score is {score}");
             Console.SetCursorPosition(28, 14);
             Console.Write(message.author);
+            Console.WriteLine("\a\a\a");
             Console.ReadKey();
         }
     }
