@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Snake
 {
@@ -10,6 +6,12 @@ namespace Snake
     {
         List<Figure> wallList;
 
+        /// <summary>
+        /// Конструктор создаёт стены по периметру заданной области.
+        /// В качестве аргументов принимает ширину и высоту области
+        /// </summary>
+        /// <param name="mapWidth"></param>
+        /// <param name="mapHeight"></param>
         public Wall(int mapWidth, int mapHeight)
         {
             wallList = new List<Figure>();
@@ -20,11 +22,14 @@ namespace Snake
             VerticalLine rigthLine = new VerticalLine(mapWidth - 2, 0, mapHeight - 1, '+');
 
             wallList.Add(topLine);
-            wallList.Add(bottomLine);
             wallList.Add(leftLine);
             wallList.Add(rigthLine);
+            wallList.Add(bottomLine);
         }
 
+        /// <summary>
+        /// Метод рисует стены
+        /// </summary>
         public void Draw()
         {
             foreach (var wall in wallList)
@@ -33,6 +38,12 @@ namespace Snake
             }
         }
 
+        /// <summary>
+        /// Метод проверяет столкновение стены с фигурой.
+        /// В качестве аргумента принимает фигуру
+        /// </summary>
+        /// <param name="figure"></param>
+        /// <returns></returns>
         internal bool IsHit(Figure figure)
         {
             foreach (var wall in wallList)

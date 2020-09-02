@@ -1,17 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snake
 {
     class Snake: Figure
     {
-        Direction direction;
-        public Point head, tail;
+        private Direction direction;
+        public Point head;
+        public Point tail;
 
+
+        /// <summary>
+        /// Метод движения змейки
+        /// </summary>
+        internal void Move()
+        {
+            tail = pList.First();
+            pList.Remove(tail);
+            head = GetNextPoint();
+            pList.Add(head);
+            tail.Clear();
+            head.Draw();
+        }
+        
+        /// <summary>
+        /// Метод питания змейки
+        /// </summary>
+        /// <param name="food"></param>
+        /// <returns></returns>
+        internal bool Eat(Point food)
+        {
+            head = GetNextPoint();
+            if (head.IsHit(food))
+            {
+                Console.WriteLine("\a");
+                food.sym = head.sym;
+                pList.Add(food);
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        /// <summary>
+        /// Метод проверяет столкновение змейки со своим телом
+        /// </summary>
+        /// <returns></returns>
+        internal bool IsHitTail()
+        {
+            head = pList.Last();
+            for (int i = 0; i < pList.Count - 3; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Конструктор змейки.
+        /// В качестве аргументов принимает точку хвоста, длину и начальное направление
+        /// </summary>
+        /// <param name="tail"></param>
+        /// <param name="length"></param>
+        /// <param name="direction"></param>
         public Snake(Point tail, int length, Direction direction)
         {
             this.direction = direction;
@@ -23,17 +77,11 @@ namespace Snake
                 pList.Add(p);
             }
         }
-
-        internal void Move()
-        {
-            tail = pList.First();
-            pList.Remove(tail);
-            head = GetNextPoint();
-            pList.Add(head);
-            tail.Clear();
-            head.Draw();
-        }
-
+        
+        /// <summary>
+        /// Метод отрисовывает движение змейки
+        /// </summary>
+        /// <returns></returns>
         public Point GetNextPoint()
         {           
             head = pList.Last();
@@ -46,18 +94,12 @@ namespace Snake
             nextPoint.sym = '&';
             return nextPoint;
         }
-
-        internal bool IsHitTail()
-        {
-            head = pList.Last();
-            for (int i = 0; i < pList.Count - 3; i++)
-            {
-                if (head.IsHit(pList[i]))
-                    return true;
-            }
-            return false;
-        }
-
+        
+        /// <summary>
+        /// Метод управления змейки с клавиатуры.
+        /// В качестве аргумента принимает клавишу
+        /// </summary>
+        /// <param name="key"></param>
         public void Handler(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
@@ -88,20 +130,6 @@ namespace Snake
                 else
                     direction = Direction.DOWN;
             }
-        }
-
-        internal bool Eat(Point food)
-        {
-            head = GetNextPoint();
-            if (head.IsHit(food))
-            {
-                Console.WriteLine("\a");
-                food.sym = head.sym;
-                pList.Add(food);
-                return true;
-            }
-            else
-                return false;
         }
     }
 }
